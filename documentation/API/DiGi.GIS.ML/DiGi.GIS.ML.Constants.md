@@ -37,7 +37,7 @@ public static ExtendedColumn YearBuilt;
 
 ## Heuristic Class
 
-Provides the constants of the first\-detection heuristic that predicts the year built \(DiGi-Organization/DiGi\.GIS\.ML\#15\)\.
+Provides the constants of the first\-detection heuristic that predicts the year built \(DiGi\-Organization/DiGi\.GIS\.ML\#15\)\.
 
 A building is predicted to have been built in the first year the detector saw it with confidence at or above [ConfidentDetectionThreshold](DiGi.GIS.ML.Constants.md#DiGi.GIS.ML.Constants.Plausibility.ConfidentDetectionThreshold 'DiGi\.GIS\.ML\.Constants\.Plausibility\.ConfidentDetectionThreshold'), falling back to the first year it was seen at all. It replaced the `OrtoBuildingDetectionModel` regressor in production: scored on a county it was not trained on, every retrained regressor came out years too late, while this rule matched the labels of that county with MAE 0.15 - see `OrtoBuildingDetectionModel.provenance.md`.
 
@@ -82,7 +82,7 @@ public static DiGi.Core.Classes.Range<int> Years { get; }
 
 ## Plausibility Class
 
-Provides the constants that date and bound a year built prediction by the imagery that first detected the building \(DiGi-Organization/DiGi\.GIS\.ML\#14, \#15\)\.
+Provides the constants that date and bound a year built prediction by the imagery that first detected the building \(DiGi\-Organization/DiGi\.GIS\.ML\#14, \#15\)\.
 
 ```csharp
 public static class Plausibility

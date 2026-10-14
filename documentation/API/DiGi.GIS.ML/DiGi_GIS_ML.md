@@ -51,7 +51,7 @@ public static bool IsModelAvailable { get; }
 
 ## OrtoBuildingDetectionModel\.ModelSHA256 Property
 
-Gets the lowercase hexadecimal SHA\-256 of the trained model file \- the identity `OrtoBuildingDetectionModel.provenance.md` records and the runner stamps on every prediction \(DiGi-Organization/DiGi\.GIS\.YOLO\.UI\#26\) \- or null when the file is absent or cannot be read\.
+Gets the lowercase hexadecimal SHA\-256 of the trained model file \- the identity `OrtoBuildingDetectionModel.provenance.md` records and the runner stamps on every prediction \(DiGi\-Organization/DiGi\.GIS\.YOLO\.UI\#26\) \- or null when the file is absent or cannot be read\.
 
 Hashed on every read, not remembered: the file is replaced in place when a model ships, and the readiness probe that reads this runs once per run.
 
