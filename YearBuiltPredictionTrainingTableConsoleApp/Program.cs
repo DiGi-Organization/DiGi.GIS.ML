@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 //
 // --unlabelled writes the input table instead: every building of the counties, labelled or not, projected exactly as a
 // training row would be but without the label. It is what a county with no labels is scored and judged from
-// (YearBuiltPredictionEvaluationConsoleApp, ZiolkowskiJakub/DiGi.GIS.ML#15).
+// (YearBuiltPredictionEvaluationConsoleApp, DiGi-Organization/DiGi.GIS.ML#15).
 //
 // Exit codes: 0 assembled, 1 argument or configuration error, 2 nothing could be read, 3 no key.
 
@@ -179,7 +179,7 @@ foreach (int countyId in countyIds)
 
     if (years_County.Count == 0)
     {
-        Console.WriteLine($"  [WARN] no 'User year built' value stored for county {countyId} - the Year Built building data update (ZiolkowskiJakub/DiGi.GIS.PostgreSQL#94) has not reached it");
+        Console.WriteLine($"  [WARN] no 'User year built' value stored for county {countyId} - the Year Built building data update (DiGi-Organization/DiGi.GIS.PostgreSQL#94) has not reached it");
         continue;
     }
 

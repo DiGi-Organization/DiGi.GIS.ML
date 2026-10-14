@@ -31,9 +31,9 @@ namespace DiGi.GIS.ML.Classes
 
         /// <summary>
         /// Reports whether this predictor can score at all.
-        /// <para>The first-detection heuristic of <see cref="Query.PredictedYearBuilts"/> needs no model file, so it is always runnable (ZiolkowskiJakub/DiGi.GIS.ML#15). Its identity is <see cref="Constants.Heuristic.Id"/>, which the runner stamps on every prediction in place of a model file's SHA-256 (ZiolkowskiJakub/DiGi.GIS.YOLO.UI#26).</para>
+        /// <para>The first-detection heuristic of <see cref="Query.PredictedYearBuilts"/> needs no model file, so it is always runnable (DiGi-Organization/DiGi.GIS.ML#15). Its identity is <see cref="Constants.Heuristic.Id"/>, which the runner stamps on every prediction in place of a model file's SHA-256 (DiGi-Organization/DiGi.GIS.YOLO.UI#26).</para>
         /// <para>Its contract is the detection years it reads, <see cref="Constants.Heuristic.Years"/>: a run whose options narrow them would hide a building's first detection and date it late, so the runner refuses such options. No radiuses are stated, and the runner then checks the radial projection against its defaults, as before.</para>
-        /// <para>It requires only the <see cref="DiGi.GIS.IO.Constants.YearBuiltPredictionFeatureGroup.Detection"/> group: the heuristic reads the detection confidence columns and nothing else, so a county whose population columns are empty still scores rather than being refused (ZiolkowskiJakub/DiGi.GIS.YOLO.UI#27).</para>
+        /// <para>It requires only the <see cref="DiGi.GIS.IO.Constants.YearBuiltPredictionFeatureGroup.Detection"/> group: the heuristic reads the detection confidence columns and nothing else, so a county whose population columns are empty still scores rather than being refused (DiGi-Organization/DiGi.GIS.YOLO.UI#27).</para>
         /// </summary>
         /// <returns>The readiness of this predictor - always runnable, with the heuristic's identity, the detection years it reads, and the detection group it requires.</returns>
         public DiGi.GIS.IO.Classes.YearBuiltPredictorReadiness YearBuiltPredictorReadiness()

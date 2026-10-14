@@ -293,11 +293,11 @@ A new table carrying the reference and predicted year built columns, or null if 
 
 Reports whether this predictor can score at all\.
 
-The first-detection heuristic of [PredictedYearBuilts\(this Table\)](DiGi.GIS.ML.md#DiGi.GIS.ML.Query.PredictedYearBuilts(thisDiGi.Core.IO.Table.Classes.Table) 'DiGi\.GIS\.ML\.Query\.PredictedYearBuilts\(this DiGi\.Core\.IO\.Table\.Classes\.Table\)') needs no model file, so it is always runnable (ZiolkowskiJakub/DiGi.GIS.ML#15). Its identity is [Id](DiGi.GIS.ML.Constants.md#DiGi.GIS.ML.Constants.Heuristic.Id 'DiGi\.GIS\.ML\.Constants\.Heuristic\.Id'), which the runner stamps on every prediction in place of a model file's SHA-256 (ZiolkowskiJakub/DiGi.GIS.YOLO.UI#26).
+The first-detection heuristic of [PredictedYearBuilts\(this Table\)](DiGi.GIS.ML.md#DiGi.GIS.ML.Query.PredictedYearBuilts(thisDiGi.Core.IO.Table.Classes.Table) 'DiGi\.GIS\.ML\.Query\.PredictedYearBuilts\(this DiGi\.Core\.IO\.Table\.Classes\.Table\)') needs no model file, so it is always runnable (DiGi-Organization/DiGi.GIS.ML#15). Its identity is [Id](DiGi.GIS.ML.Constants.md#DiGi.GIS.ML.Constants.Heuristic.Id 'DiGi\.GIS\.ML\.Constants\.Heuristic\.Id'), which the runner stamps on every prediction in place of a model file's SHA-256 (DiGi-Organization/DiGi.GIS.YOLO.UI#26).
 
 Its contract is the detection years it reads, [Years](DiGi.GIS.ML.Constants.md#DiGi.GIS.ML.Constants.Heuristic.Years 'DiGi\.GIS\.ML\.Constants\.Heuristic\.Years'): a run whose options narrow them would hide a building's first detection and date it late, so the runner refuses such options. No radiuses are stated, and the runner then checks the radial projection against its defaults, as before.
 
-It requires only the [DiGi\.GIS\.IO\.Constants\.YearBuiltPredictionFeatureGroup\.Detection](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.io.constants.yearbuiltpredictionfeaturegroup.detection 'DiGi\.GIS\.IO\.Constants\.YearBuiltPredictionFeatureGroup\.Detection') group: the heuristic reads the detection confidence columns and nothing else, so a county whose population columns are empty still scores rather than being refused (ZiolkowskiJakub/DiGi.GIS.YOLO.UI#27).
+It requires only the [DiGi\.GIS\.IO\.Constants\.YearBuiltPredictionFeatureGroup\.Detection](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.io.constants.yearbuiltpredictionfeaturegroup.detection 'DiGi\.GIS\.IO\.Constants\.YearBuiltPredictionFeatureGroup\.Detection') group: the heuristic reads the detection confidence columns and nothing else, so a county whose population columns are empty still scores rather than being refused (DiGi-Organization/DiGi.GIS.YOLO.UI#27).
 
 ```csharp
 public DiGi.GIS.IO.Classes.YearBuiltPredictorReadiness YearBuiltPredictorReadiness();

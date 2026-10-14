@@ -20,7 +20,7 @@ using System.Text;
 //
 // The table may carry no 'Year built' label - an unlabelled county written by YearBuiltPredictionTrainingTableConsoleApp
 // --unlabelled. The accuracy section is then skipped and only the plausibility section is reported: how many predictions
-// are later than the building's first confident detection year (ZiolkowskiJakub/DiGi.GIS.ML#14, #15).
+// are later than the building's first confident detection year (DiGi-Organization/DiGi.GIS.ML#14, #15).
 //
 // Exit codes: 0 reported, 1 arguments, 2 the table, a model or the manifest could not be read.
 
@@ -145,7 +145,7 @@ Dictionary<string, List<double?>> predictors = new()
     ["first detection year"] = years_FirstDetection,
 };
 
-// Scored through Query.PredictedYearBuilts - the deployed path end to end. Since ZiolkowskiJakub/DiGi.GIS.ML#15 that is
+// Scored through Query.PredictedYearBuilts - the deployed path end to end. Since DiGi-Organization/DiGi.GIS.ML#15 that is
 // the first-detection heuristic, not a model: it is the bar a retrained model scored by --model has to beat, and it
 // leaves out a building that was never detected, so its n can be smaller than the other rows'.
 Table? table_Incumbent = table.PredictedYearBuilts();
@@ -304,7 +304,7 @@ if (labelled)
 
 // Plausibility: a building confidently seen in a year cannot have been built after it. The deployed path - the
 // first-detection heuristic - reads 0 here by construction. The retrained row is the raw model scored by --model, and
-// it is the one this section judges: on a county the model was not trained on, it is how ZiolkowskiJakub/DiGi.GIS.ML#15
+// it is the one this section judges: on a county the model was not trained on, it is how DiGi-Organization/DiGi.GIS.ML#15
 // found the regressor dating most buildings years after the imagery first saw them.
 List<int?> years_Confident = table.FirstConfidentDetectionYears();
 int year_FirstImagery = DiGi.GIS.ML.Constants.Plausibility.FirstPredictionYear;

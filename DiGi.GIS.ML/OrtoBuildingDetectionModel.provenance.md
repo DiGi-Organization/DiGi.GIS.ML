@@ -2,9 +2,9 @@
 
 What `OrtoBuildingDetectionModel.mlnet` was trained on, how it was measured, and what was decided along the way. Without this, the next person cannot tell which data a model came from.
 
-## Retired from production 2026-10-09 (ZiolkowskiJakub/DiGi.GIS.ML#15)
+## Retired from production 2026-10-09 (DiGi-Organization/DiGi.GIS.ML#15)
 
-**The year built is no longer predicted by this model.** `Query.PredictedYearBuilts` now uses the first-detection heuristic: the first year the detector saw the building with confidence ≥ 0.5, falling back to the first year with any detection. A building that was never detected is left out. The runner stamps `first-confident-detection@0.5` (`Constants.Heuristic.Id`) on every prediction instead of a model SHA-256. The model, its generated code and the training and evaluation tools stay here as the baseline for the parked feature redesign (ZiolkowskiJakub/DiGi.GIS.ML#17). Any new model has to beat the heuristic on a county it was not trained on before it returns to production.
+**The year built is no longer predicted by this model.** `Query.PredictedYearBuilts` now uses the first-detection heuristic: the first year the detector saw the building with confidence ≥ 0.5, falling back to the first year with any detection. A building that was never detected is left out. The runner stamps `first-confident-detection@0.5` (`Constants.Heuristic.Id`) on every prediction instead of a model SHA-256. The model, its generated code and the training and evaluation tools stay here as the baseline for the parked feature redesign (DiGi-Organization/DiGi.GIS.ML#17). Any new model has to beat the heuristic on a county it was not trained on before it returns to production.
 
 ### Why: the regressor does not transfer to a county it was not trained on
 
@@ -60,9 +60,9 @@ Reproduce:
 
 ---
 
-## Shipped 2026-10-08 (ZiolkowskiJakub/DiGi.GIS.ML#13), retired from production 2026-10-09
+## Shipped 2026-10-08 (DiGi-Organization/DiGi.GIS.ML#13), retired from production 2026-10-09
 
-The model in this folder. It was trained on the detection features of the retrained YOLO detector **`train9_fresh`** (YOLO26x, SHA-256 `2dd833e438ffcb1352ae7675063c9f0c97ca1c39ce6410a0bfab96e8b3cbdc9a`, ZiolkowskiJakub/DiGi.GIS.YOLO.UI#12). **It is only valid with that detector:** a deployment scoring with `train8` detections hands it features it was never fitted on.
+The model in this folder. It was trained on the detection features of the retrained YOLO detector **`train9_fresh`** (YOLO26x, SHA-256 `2dd833e438ffcb1352ae7675063c9f0c97ca1c39ce6410a0bfab96e8b3cbdc9a`, DiGi-Organization/DiGi.GIS.YOLO.UI#12). **It is only valid with that detector:** a deployment scoring with `train8` detections hands it features it was never fitted on.
 
 | | |
 |---|---|
@@ -80,11 +80,11 @@ The model in this folder. It was trained on the detection features of the retrai
 | Counties | the 217 counties holding a `User year built` label. The five old-estate counties carry 24 047 rows (5: 10 443, 80328: 4 340, 204: 3 801, 75125: 3 640, 104106: 1 823); 212 newly labelled counties carry 961 |
 | Labels | the stored `User year built` column: 19 distinct values, 81.1 % `2008` |
 | Feature list | unchanged. The header is byte-identical to the #11 table's; 2 of 174 columns are constant (`Municipality population 2024`, `2025`) |
-| Detection features | the `train9_fresh` detections, written for the 25 007 labelled references with the replacing write of ZiolkowskiJakub/DiGi.GIS.YOLO.UI#21. No `train8` value survives on these buildings (verified on all 1 823 of county 104106) |
+| Detection features | the `train9_fresh` detections, written for the 25 007 labelled references with the replacing write of DiGi-Organization/DiGi.GIS.YOLO.UI#21. No `train8` value survives on these buildings (verified on all 1 823 of county 104106) |
 
 ### Configuration
 
-The `.mbconfig` is the one ZiolkowskiJakub/DiGi.GIS.ML#11's twin was trained with, and `ColumnProperties` and `TrainingOption` here record it.
+The `.mbconfig` is the one DiGi-Organization/DiGi.GIS.ML#11's twin was trained with, and `ColumnProperties` and `TrainingOption` here record it.
 - The ten text columns are **not** marked categorical: AutoML featurizes them as text instead of one-hot encoding them.
 - `Is residential` and `Is occupied` are booleans converted to a number.
 
@@ -98,12 +98,12 @@ The holdout is the FNV-1a holdout of the reference, the `Test` category of the Y
 |---|---|---|---|
 | full table, random 20 % | 4 956 | 0.358 / 1.797 / 0.791 | **0.338 / 1.271 / 0.896** |
 | clean: holdout ∧ ¬`Legacy` | 179 | 1.894 / 4.283 / −0.075 | **1.251 / 2.609 / 0.601** |
-| old estate without 204 (the [#4](https://github.com/ZiolkowskiJakub/DiGi.GIS.ML/issues/4) carve) | 4 012 | 0.285 / 1.583 / 0.821 | **0.277 / 1.129 / 0.909** |
+| old estate without 204 (the [#4](https://github.com/DiGi-Organization/DiGi.GIS.ML/issues/4) carve) | 4 012 | 0.285 / 1.583 / 0.821 | **0.277 / 1.129 / 0.909** |
 | five old-estate counties (#11's carve) | 4 777 | **0.301** / 1.632 / 0.806 | 0.304 / **1.192** / **0.897** |
 
-- **Against what it replaces, on the clean row** (no model has seen these buildings): the 2026-09-02 model, scored on the same `train9_fresh` features, gives 2.246 / 3.469 / 0.294. This twin gives 1.251 / 2.609 / 0.601. Constant 2008 gives 8.184 / 9.167 / −3.93. This is ZiolkowskiJakub/DiGi.GIS.ML#13's ship rule, and it is met.
+- **Against what it replaces, on the clean row** (no model has seen these buildings): the 2026-09-02 model, scored on the same `train9_fresh` features, gives 2.246 / 3.469 / 0.294. This twin gives 1.251 / 2.609 / 0.601. Constant 2008 gives 8.184 / 9.167 / −3.93. This is DiGi-Organization/DiGi.GIS.ML#13's ship rule, and it is met.
 - **Against #11's twin on the same 4 777 references:** the #11 twin on `train8` features scores 0.600 / 1.654 / 0.801 through the deployed path; this twin on `train9_fresh` features scores 0.304 / 1.192 / 0.897.
-- **The [#4](https://github.com/ZiolkowskiJakub/DiGi.GIS.ML/issues/4) bar is met**: MAE, RMSE and R² all beat the heuristic on the #4 carve and on the full table. It ties on MAE only on the five-county carve, by 0.003.
+- **The [#4](https://github.com/DiGi-Organization/DiGi.GIS.ML/issues/4) bar is met**: MAE, RMSE and R² all beat the heuristic on the #4 carve and on the full table. It ties on MAE only on the five-county carve, by 0.003.
 
 **The two scoring paths of `YearBuiltPredictionEvaluationConsoleApp` disagree.** The `retrained` row loads the table with ML.NET's `TextLoader`, as `mlnet` does at training time. The `deployed path` row binds each row to `ModelInput`, as production does. For one and the same model, the `retrained` row reads about 0.07–0.09 years **higher** MAE (twin: 0.414 vs 0.338 on the full table; #11 twin: 0.689 vs 0.600). RMSE and R² agree to within 0.01. The cause is not yet established; the likely suspect is how an empty cell reaches the missing-value replacement in each path. The figures first posted on #13, and the #11 hold decision, were read through the `retrained` path. #11's twin scores 0.600 against the heuristic's 0.568 through the deployed path, so the hold stands.
 
@@ -180,11 +180,11 @@ Measured on 4 012 rows the twin never saw:
 | **first detection year** (a ten-line rule) | **0.434** | 1.730 | 0.786 |
 | **this model (twin)** | 0.476 | **1.217** | **0.894** |
 
-**This model does not beat the trivial heuristic outright.** It wins on RMSE and R² and loses on MAE. The heuristic is exactly right on 89.2 % of rows but 3.8 % of its errors are 5 years or more, worst case 16; this model is exactly right less often with a much tighter tail. Whether that trade is worth making is a product decision — see [#4](https://github.com/ZiolkowskiJakub/DiGi.GIS.ML/issues/4).
+**This model does not beat the trivial heuristic outright.** It wins on RMSE and R² and loses on MAE. The heuristic is exactly right on 89.2 % of rows but 3.8 % of its errors are 5 years or more, worst case 16; this model is exactly right less often with a much tighter tail. Whether that trade is worth making is a product decision — see [#4](https://github.com/DiGi-Organization/DiGi.GIS.ML/issues/4).
 
 The previous model's −1.771 is not a fair reading of what it once was. It binds legacy display names (`Area`, `Location X`, `Polpulation 2008`) that no longer exist, so it reads defaults for most features. It is what that model would have produced on current data.
 
-### The cost of a narrowed projection ([#6](https://github.com/ZiolkowskiJakub/DiGi.GIS.ML/issues/6))
+### The cost of a narrowed projection ([#6](https://github.com/DiGi-Organization/DiGi.GIS.ML/issues/6))
 
 Measured with `YearBuiltPredictionEvaluationConsoleApp --years 2008..2020` on the 20 241 training rows, scoring the shipped model through the deployed path. This is a fit, not a holdout - the model has seen these rows - so the absolute figures are optimistic, but the relative delta between the full and the narrowed projection is what the feature-contract guard sizes:
 
@@ -209,7 +209,7 @@ Narrowing the projection to 2008..2020 drops R² by about 0.10 and multiplies th
 | `County Id` / `Subdivision Id` numeric, not categorical | Ordinal identifiers; the names carry the categorical signal |
 | `Building specific functions` kept whole (298 distinct) | Multi-valued text left as one category rather than split or hashed. Revisit if it proves to be memorising |
 | `Municipality population 2024`, `2025` kept | Zero on every row — the BDL series does not reach them. Two dead features, left in to keep the schema aligned with the allow-list |
-| Year range 2008–2025 | Held for this cycle; 2026 is [DiGi.GIS.IO#10](https://github.com/ZiolkowskiJakub/DiGi.GIS.IO/issues/10) |
+| Year range 2008–2025 | Held for this cycle; 2026 is [DiGi.GIS.IO#10](https://github.com/DiGi-Organization/DiGi.GIS.IO/issues/10) |
 | `TrainingTime` 3 600 s | The search plateaus early — best R² moved 0.8858 at 18 models to 0.8947 at 609 |
 
 ## Source
@@ -224,7 +224,7 @@ Reports: `DiGi.Test/user files/reports/YearBuiltPrediction_Accuracy_Clean.txt`, 
 
 ---
 
-## Retrained 2026-09-29 (ZiolkowskiJakub/DiGi.GIS.ML#11) — held
+## Retrained 2026-09-29 (DiGi-Organization/DiGi.GIS.ML#11) — held
 
 The retrain on the stored `User year built` label source ran on 2026-09-29 and was **held**: no model was shipped, so this file above remains the record of the shipped model.
 
@@ -259,21 +259,21 @@ Isolation on the old-estate rows only — the 20 246 rows that are not county 20
 | Predictor | MAE (years) | RMSE | R² |
 |---|---|---|---|
 | constant 2008 | 1.453 | 4.010 | −0.151 |
-| first detection year — **reproduces the [#4](https://github.com/ZiolkowskiJakub/DiGi.GIS.ML/issues/4) bar exactly** | 0.434 | 1.730 | 0.786 |
+| first detection year — **reproduces the [#4](https://github.com/DiGi-Organization/DiGi.GIS.ML/issues/4) bar exactly** | 0.434 | 1.730 | 0.786 |
 | **this retrain (twin)** | **0.480** | **1.230** | **0.892** |
 
 The deployed-path row is valid only on the full table: the incumbent was trained on every old-estate row, so a carve of old rows alone is a fit for it, and its full-table figure is dominated by county 204, which it was never fitted on. The shipped candidate scored MAE 0.270 / RMSE 0.822 / R² 0.951 on the full-table random carve — **contaminated**, it saw those rows in training; kept for the contrast.
 
 ### Why held
 
-The [#4](https://github.com/ZiolkowskiJakub/DiGi.GIS.ML/issues/4) bar — beat MAE 0.434, RMSE 1.730 and R² 0.786 simultaneously on a holdout the model has not seen, split stated — is not met: the twin's MAE is 0.689 on the full table and 0.480 on the old estate, against the 0.434 bar; RMSE and R² pass on both carves. The retrain leaves the incumbent's MAE-versus-heuristic trade essentially unchanged — the previous twin scored 0.476 / 1.217 / 0.894 on the same 4 012-row carve (administrative features on 9 699 old rows have drifted since, so the two twins are near, not identical, comparisons).
+The [#4](https://github.com/DiGi-Organization/DiGi.GIS.ML/issues/4) bar — beat MAE 0.434, RMSE 1.730 and R² 0.786 simultaneously on a holdout the model has not seen, split stated — is not met: the twin's MAE is 0.689 on the full table and 0.480 on the old estate, against the 0.434 bar; RMSE and R² pass on both carves. The retrain leaves the incumbent's MAE-versus-heuristic trade essentially unchanged — the previous twin scored 0.476 / 1.217 / 0.894 on the same 4 012-row carve (administrative features on 9 699 old rows have drifted since, so the two twins are near, not identical, comparisons).
 
 Two things the measurement does settle:
 
 - ~~**The grouped-by-subdivision split has now been validly measured for a model**~~. **Withdrawn 2026-10-08 (#13).** The twin was trained on everything outside the *reference* holdout, so most rows of the subdivision carve were in its training data. Its 0.307 there is contaminated and says nothing about memorised neighbourhoods.
 - **The heuristic itself degrades on the new table** (0.568 / 2.189 / 0.652 against the old 0.434 / 1.730 / 0.786) — county 204 and the stored-column labels are harder territory, for the model and for the ten-line rule alike.
 
-The incumbent stays shipped. The retrain's table and both models are kept in `user files/reports/` for ZiolkowskiJakub/DiGi.GIS.ML#13, which re-scores after the YOLO detector retrain rewrites the detection features.
+The incumbent stays shipped. The retrain's table and both models are kept in `user files/reports/` for DiGi-Organization/DiGi.GIS.ML#13, which re-scores after the YOLO detector retrain rewrites the detection features.
 
 Reports: `DiGi.Test/user files/reports/YearBuiltPrediction_Accuracy_Clean_2026-09-29.txt` (twin, full table), `YearBuiltPrediction_Accuracy_2026-09-29.txt` (shipped candidate, contaminated), `YearBuiltPrediction_Accuracy_No204_2026-09-29.txt` (twin, old estate).
 

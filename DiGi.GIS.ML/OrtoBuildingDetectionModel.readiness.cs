@@ -18,7 +18,7 @@ namespace DiGi_GIS_ML
         public static string ResolvedModelPath => MLNetModelPath;
 
         /// <summary>
-        /// Gets the lowercase hexadecimal SHA-256 of the trained model file - the identity <c>OrtoBuildingDetectionModel.provenance.md</c> records and the runner stamps on every prediction (ZiolkowskiJakub/DiGi.GIS.YOLO.UI#26) - or null when the file is absent or cannot be read.
+        /// Gets the lowercase hexadecimal SHA-256 of the trained model file - the identity <c>OrtoBuildingDetectionModel.provenance.md</c> records and the runner stamps on every prediction (DiGi-Organization/DiGi.GIS.YOLO.UI#26) - or null when the file is absent or cannot be read.
         /// <para>Hashed on every read, not remembered: the file is replaced in place when a model ships, and the readiness probe that reads this runs once per run.</para>
         /// </summary>
         public static string? ModelSHA256

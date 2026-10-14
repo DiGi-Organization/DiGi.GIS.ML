@@ -10,8 +10,8 @@ namespace DiGi.GIS.ML
         /// <summary>
         /// Predicts the construction year of each building from the imagery that detected it.
         /// <para>A building is predicted to have been built in the first year the detector saw it with confidence at or above <see cref="Constants.Plausibility.ConfidentDetectionThreshold"/>, falling back to the first year it was seen at all. A building the detector never saw has nothing to be dated by and is left out of the result rather than filled with a default, as <c>IYearBuiltPredictor.Predict</c> allows.</para>
-        /// <para>This heuristic replaced the <c>OrtoBuildingDetectionModel</c> regressor (ZiolkowskiJakub/DiGi.GIS.ML#15). The regressor memorised the counties it was trained on - their location, and the pattern of orthophoto years each one has - and scored any other county years too late: on held-out county 80328 every retrain put 76-89 % of buildings after their first confident detection, while this rule matched its labels with MAE 0.15. The label is itself the first year a building appears in the orthophoto record, so the first detection is its direct estimate. The model and its tooling stay in the repository for a feature redesign that has to beat this rule on a held-out county first.</para>
-        /// <para>The run reports how many buildings were dated from a confident detection, from a weaker one only, and how many were left out. It keeps the guard of ZiolkowskiJakub/DiGi.GIS.ML#14: the share of predictions later than their first confident detection year is 0 by construction here, and the table is refused if a future change lets it exceed <see cref="Constants.Plausibility.MaximumImplausibleShare"/>.</para>
+        /// <para>This heuristic replaced the <c>OrtoBuildingDetectionModel</c> regressor (DiGi-Organization/DiGi.GIS.ML#15). The regressor memorised the counties it was trained on - their location, and the pattern of orthophoto years each one has - and scored any other county years too late: on held-out county 80328 every retrain put 76-89 % of buildings after their first confident detection, while this rule matched its labels with MAE 0.15. The label is itself the first year a building appears in the orthophoto record, so the first detection is its direct estimate. The model and its tooling stay in the repository for a feature redesign that has to beat this rule on a held-out county first.</para>
+        /// <para>The run reports how many buildings were dated from a confident detection, from a weaker one only, and how many were left out. It keeps the guard of DiGi-Organization/DiGi.GIS.ML#14: the share of predictions later than their first confident detection year is 0 by construction here, and the table is refused if a future change lets it exceed <see cref="Constants.Plausibility.MaximumImplausibleShare"/>.</para>
         /// </summary>
         /// <param name="table">The table containing building features, including a reference column and the per-year <c>Prediction Confidence</c> columns.</param>
         /// <returns>A new table carrying the reference and predicted year built columns, one row per detected building, or null if the input table is null, lacks a reference column, or fails the plausibility guard.</returns>
@@ -65,7 +65,7 @@ namespace DiGi.GIS.ML
                     rows_Confident++;
 
                     // Zero by construction. Counted so the guard below still trips if a change ever dates a building
-                    // later than the imagery that confidently saw it - the defect of ZiolkowskiJakub/DiGi.GIS.ML#14.
+                    // later than the imagery that confidently saw it - the defect of DiGi-Organization/DiGi.GIS.ML#14.
                     if (year > confident)
                     {
                         predictions_AboveConfidentDetection++;
