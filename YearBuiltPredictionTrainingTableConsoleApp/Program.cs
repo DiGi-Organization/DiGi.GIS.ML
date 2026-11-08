@@ -67,10 +67,10 @@ if (string.IsNullOrWhiteSpace(key))
     Console.WriteLine($"[INFO] no key in '{DiGi.GIS.ML.ConsoleApp.Constants.FileName.GISWebAPIClientConfigurationFile}' - continuing unauthenticated, which the read endpoints currently allow.");
 }
 
-GISWebAPIManager? gisWebAPIManager = DiGi.GIS.WebAPI.Create.GISWebAPIManager(key);
-if (gisWebAPIManager is null)
+GISWebAPIManager? gISWebAPIManager = DiGi.GIS.WebAPI.Create.GISWebAPIManager(key);
+if (gISWebAPIManager is null)
 {
-    Console.WriteLine("[ERROR] Failed to initialize GISWebAPIManager with the configured key.");
+    Console.WriteLine("[ERROR] Failed to initialize gISWebAPIManager with the configured key.");
     return 3;
 }
 
@@ -117,7 +117,7 @@ foreach (int countyId in countyIds)
         int rowCount_FeaturePage = 0;
         do
         {
-            Table? table_Features = await gisWebAPIManager.BuildingDataTableAsync(countyId, columnUniqueIds, cursor_Features, DiGi.GIS.ML.ConsoleApp.Constants.Count.FeatureRow_Maximum, cancellationToken: cancellationToken);
+            Table? table_Features = await gISWebAPIManager.BuildingDataTableAsync(countyId, columnUniqueIds, cursor_Features, DiGi.GIS.ML.ConsoleApp.Constants.Count.FeatureRow_Maximum, cancellationToken: cancellationToken);
             if (table_Features is null)
             {
                 // A partial county would be judged as if it were whole; stop reading it and say so.
@@ -149,7 +149,7 @@ foreach (int countyId in countyIds)
 
     do
     {
-        Table? table_Label = await gisWebAPIManager.BuildingDataTableAsync(countyId, columnUniqueIds_Label, cursor, DiGi.GIS.ML.ConsoleApp.Constants.Count.Row_Maximum, cancellationToken: cancellationToken);
+        Table? table_Label = await gISWebAPIManager.BuildingDataTableAsync(countyId, columnUniqueIds_Label, cursor, DiGi.GIS.ML.ConsoleApp.Constants.Count.Row_Maximum, cancellationToken: cancellationToken);
         if (table_Label is null)
         {
             // A failed page is not a county with no label; continuing would train on a partial label set silently.
@@ -206,7 +206,7 @@ foreach (int countyId in countyIds)
     {
         List<string> references_Batch = references.GetRange(i, Math.Min(DiGi.GIS.ML.ConsoleApp.Constants.Count.Reference_Maximum, references.Count - i));
 
-        Table? table = await gisWebAPIManager.BuildingDataTableAsync(countyId, references_Batch, columnUniqueIds, cancellationToken: cancellationToken);
+        Table? table = await gISWebAPIManager.BuildingDataTableAsync(countyId, references_Batch, columnUniqueIds, cancellationToken: cancellationToken);
         if (table is null)
         {
             Console.WriteLine($"  [WARN] a page of {references_Batch.Count} feature rows could not be read");

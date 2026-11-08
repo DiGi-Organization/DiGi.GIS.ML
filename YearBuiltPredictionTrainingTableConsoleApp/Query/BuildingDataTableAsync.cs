@@ -17,16 +17,16 @@ namespace DiGi.GIS.ML.ConsoleApp
         /// <para>The projection is an allow-list rather than a filter, and it is the same allow-list the inference pipeline projects through - <c>DiGi.GIS.IO.Query.YearBuiltPredictionInputColumns</c>. Asking for every column instead would hand the trainer the pipeline&apos;s own output column back as a feature, which reads as a large accuracy gain rather than as a defect.</para>
         /// <para>Deliberately mirrors <c>DiGi.GIS.YOLO.UI.Query.BuildingDataTableAsync</c> rather than referencing it: that assembly targets <c>net10.0-windows7.0</c> and carries the image export, and a training table assembler has no business loading <c>System.Drawing</c>. The contract the two must agree on is the column list, and that is shared rather than copied.</para>
         /// </summary>
-        /// <param name="gisWebAPIManager">The <see cref="GISWebAPIManager"/> instance used to communicate with the WebAPI.</param>
+        /// <param name="gISWebAPIManager">The <see cref="GISWebAPIManager"/> instance used to communicate with the WebAPI.</param>
         /// <param name="countyId">The identifier of the county row the references belong to.</param>
         /// <param name="references">The building references to read, at most the endpoint&apos;s cap.</param>
         /// <param name="columnUniqueIds">The unique identifiers of the columns to project. Null or empty asks for every column, which this never wants.</param>
         /// <param name="postOptions">Optional configuration options for the request.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>A task returning the projected table, or null when it could not be read.</returns>
-        public static async Task<Table?> BuildingDataTableAsync(this GISWebAPIManager? gisWebAPIManager, int countyId, IEnumerable<string>? references, IEnumerable<string>? columnUniqueIds, PostOptions? postOptions = null, CancellationToken cancellationToken = default)
+        public static async Task<Table?> BuildingDataTableAsync(this GISWebAPIManager? gISWebAPIManager, int countyId, IEnumerable<string>? references, IEnumerable<string>? columnUniqueIds, PostOptions? postOptions = null, CancellationToken cancellationToken = default)
         {
-            if (gisWebAPIManager is null || references is null)
+            if (gISWebAPIManager is null || references is null)
             {
                 return null;
             }
@@ -57,7 +57,7 @@ namespace DiGi.GIS.ML.ConsoleApp
                 }
             }
 
-            HttpClient? httpClient = gisWebAPIManager.CreateHttpClient<BuildingDataController>(nameof(BuildingDataController.GetTableByBuildingDataByReferencesParameterAsync), out string? path);
+            HttpClient? httpClient = gISWebAPIManager.CreateHttpClient<BuildingDataController>(nameof(BuildingDataController.GetTableByBuildingDataByReferencesParameterAsync), out string? path);
             if (httpClient is null || string.IsNullOrWhiteSpace(path))
             {
                 Serilog.Modify.Log(Serilog.Enums.LogEventLevel.Error, "HttpClient or path for {Method} could not be resolved", nameof(BuildingDataController.GetTableByBuildingDataByReferencesParameterAsync));
@@ -105,7 +105,7 @@ namespace DiGi.GIS.ML.ConsoleApp
         /// <para>The page is keyed by reference: the server answers the first <c>pageSize</c> rows after <c>cursor</c> - or from the start when it is null - and the caller advances <c>cursor</c> to the last reference it read until a short page answers. A page shorter than <c>pageSize</c> is the end of the county.</para>
         /// <para>The projection is an allow-list, and the same allow-list the inference pipeline projects through - <c>DiGi.GIS.IO.Query.YearBuiltPredictionInputColumns</c> - so asking for every column would hand the trainer the pipeline&apos;s own output column back as a feature. The server always adds <c>Reference</c> and <c>County Id</c> on top of it.</para>
         /// </summary>
-        /// <param name="gisWebAPIManager">The <see cref="GISWebAPIManager"/> instance used to communicate with the WebAPI.</param>
+        /// <param name="gISWebAPIManager">The <see cref="GISWebAPIManager"/> instance used to communicate with the WebAPI.</param>
         /// <param name="countyId">The identifier of the county partition to page.</param>
         /// <param name="columnUniqueIds">The unique identifiers of the columns to project. Null or empty asks for every column, which this never wants.</param>
         /// <param name="cursor">The last reference read on the previous page, or null for the first page.</param>
@@ -113,9 +113,9 @@ namespace DiGi.GIS.ML.ConsoleApp
         /// <param name="postOptions">Optional configuration options for the request.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>A task returning the page as a projected table, or null when it could not be read.</returns>
-        public static async Task<Table?> BuildingDataTableAsync(this GISWebAPIManager? gisWebAPIManager, int countyId, IEnumerable<string>? columnUniqueIds, string? cursor, int pageSize, PostOptions? postOptions = null, CancellationToken cancellationToken = default)
+        public static async Task<Table?> BuildingDataTableAsync(this GISWebAPIManager? gISWebAPIManager, int countyId, IEnumerable<string>? columnUniqueIds, string? cursor, int pageSize, PostOptions? postOptions = null, CancellationToken cancellationToken = default)
         {
-            if (gisWebAPIManager is null || countyId <= 0)
+            if (gISWebAPIManager is null || countyId <= 0)
             {
                 return null;
             }
@@ -132,7 +132,7 @@ namespace DiGi.GIS.ML.ConsoleApp
                 }
             }
 
-            HttpClient? httpClient = gisWebAPIManager.CreateHttpClient<BuildingDataController>(nameof(BuildingDataController.GetTableByBuildingDataByPagingParameterAsync), out string? path);
+            HttpClient? httpClient = gISWebAPIManager.CreateHttpClient<BuildingDataController>(nameof(BuildingDataController.GetTableByBuildingDataByPagingParameterAsync), out string? path);
             if (httpClient is null || string.IsNullOrWhiteSpace(path))
             {
                 Serilog.Modify.Log(Serilog.Enums.LogEventLevel.Error, "HttpClient or path for {Method} could not be resolved", nameof(BuildingDataController.GetTableByBuildingDataByPagingParameterAsync));

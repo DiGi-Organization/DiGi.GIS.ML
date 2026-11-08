@@ -25,13 +25,13 @@ The page is keyed by reference: the server answers the first `pageSize` rows aft
 The projection is an allow-list, and the same allow-list the inference pipeline projects through - `DiGi.GIS.IO.Query.YearBuiltPredictionInputColumns` - so asking for every column would hand the trainer the pipeline's own output column back as a feature. The server always adds `Reference` and `County Id` on top of it.
 
 ```csharp
-public static System.Threading.Tasks.Task<DiGi.Core.IO.Table.Classes.Table?> BuildingDataTableAsync(this DiGi.GIS.WebAPI.Classes.GISWebAPIManager? gisWebAPIManager, int countyId, System.Collections.Generic.IEnumerable<string>? columnUniqueIds, string? cursor, int pageSize, DiGi.WebAPI.Classes.PostOptions? postOptions=null, System.Threading.CancellationToken cancellationToken=default(System.Threading.CancellationToken));
+public static System.Threading.Tasks.Task<DiGi.Core.IO.Table.Classes.Table?> BuildingDataTableAsync(this DiGi.GIS.WebAPI.Classes.GISWebAPIManager? gISWebAPIManager, int countyId, System.Collections.Generic.IEnumerable<string>? columnUniqueIds, string? cursor, int pageSize, DiGi.WebAPI.Classes.PostOptions? postOptions=null, System.Threading.CancellationToken cancellationToken=default(System.Threading.CancellationToken));
 ```
 #### Parameters
 
-<a name='DiGi.GIS.ML.ConsoleApp.Query.BuildingDataTableAsync(thisDiGi.GIS.WebAPI.Classes.GISWebAPIManager,int,System.Collections.Generic.IEnumerable_string_,string,int,DiGi.WebAPI.Classes.PostOptions,System.Threading.CancellationToken).gisWebAPIManager'></a>
+<a name='DiGi.GIS.ML.ConsoleApp.Query.BuildingDataTableAsync(thisDiGi.GIS.WebAPI.Classes.GISWebAPIManager,int,System.Collections.Generic.IEnumerable_string_,string,int,DiGi.WebAPI.Classes.PostOptions,System.Threading.CancellationToken).gISWebAPIManager'></a>
 
-`gisWebAPIManager` [DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.webapi.classes.giswebapimanager 'DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager')
+`gISWebAPIManager` [DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.webapi.classes.giswebapimanager 'DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager')
 
 The [DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.webapi.classes.giswebapimanager 'DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager') instance used to communicate with the WebAPI\.
 
@@ -86,13 +86,13 @@ The projection is an allow-list rather than a filter, and it is the same allow-l
 Deliberately mirrors `DiGi.GIS.YOLO.UI.Query.BuildingDataTableAsync` rather than referencing it: that assembly targets `net10.0-windows7.0` and carries the image export, and a training table assembler has no business loading `System.Drawing`. The contract the two must agree on is the column list, and that is shared rather than copied.
 
 ```csharp
-public static System.Threading.Tasks.Task<DiGi.Core.IO.Table.Classes.Table?> BuildingDataTableAsync(this DiGi.GIS.WebAPI.Classes.GISWebAPIManager? gisWebAPIManager, int countyId, System.Collections.Generic.IEnumerable<string>? references, System.Collections.Generic.IEnumerable<string>? columnUniqueIds, DiGi.WebAPI.Classes.PostOptions? postOptions=null, System.Threading.CancellationToken cancellationToken=default(System.Threading.CancellationToken));
+public static System.Threading.Tasks.Task<DiGi.Core.IO.Table.Classes.Table?> BuildingDataTableAsync(this DiGi.GIS.WebAPI.Classes.GISWebAPIManager? gISWebAPIManager, int countyId, System.Collections.Generic.IEnumerable<string>? references, System.Collections.Generic.IEnumerable<string>? columnUniqueIds, DiGi.WebAPI.Classes.PostOptions? postOptions=null, System.Threading.CancellationToken cancellationToken=default(System.Threading.CancellationToken));
 ```
 #### Parameters
 
-<a name='DiGi.GIS.ML.ConsoleApp.Query.BuildingDataTableAsync(thisDiGi.GIS.WebAPI.Classes.GISWebAPIManager,int,System.Collections.Generic.IEnumerable_string_,System.Collections.Generic.IEnumerable_string_,DiGi.WebAPI.Classes.PostOptions,System.Threading.CancellationToken).gisWebAPIManager'></a>
+<a name='DiGi.GIS.ML.ConsoleApp.Query.BuildingDataTableAsync(thisDiGi.GIS.WebAPI.Classes.GISWebAPIManager,int,System.Collections.Generic.IEnumerable_string_,System.Collections.Generic.IEnumerable_string_,DiGi.WebAPI.Classes.PostOptions,System.Threading.CancellationToken).gISWebAPIManager'></a>
 
-`gisWebAPIManager` [DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.webapi.classes.giswebapimanager 'DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager')
+`gISWebAPIManager` [DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.webapi.classes.giswebapimanager 'DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager')
 
 The [DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.webapi.classes.giswebapimanager 'DiGi\.GIS\.WebAPI\.Classes\.GISWebAPIManager') instance used to communicate with the WebAPI\.
 
