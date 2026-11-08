@@ -30,7 +30,7 @@ namespace DiGi_GIS_ML
         /// <param name="allowQuoting">Boolean if quoting is allowed in the training file.</param>
         public static void Train(string outputModelPath, string inputDataFilePath = RetrainFilePath, char separatorChar = RetrainSeparatorChar, bool hasHeader = RetrainHasHeader, bool allowQuoting = RetrainAllowQuoting)
         {
-            var mlContext = new MLContext();
+            MLContext mlContext = new();
 
             var data = LoadIDataViewFromFile(mlContext, inputDataFilePath, separatorChar, hasHeader, allowQuoting);
             var model = RetrainModel(mlContext, data);

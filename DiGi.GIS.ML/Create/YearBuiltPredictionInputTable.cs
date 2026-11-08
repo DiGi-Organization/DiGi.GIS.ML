@@ -3,6 +3,7 @@ using DiGi.Core.Classes;
 using DiGi.Core.IO.Table.Classes;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace DiGi.GIS.ML
 {
@@ -53,7 +54,7 @@ namespace DiGi.GIS.ML
                 }
 
                 // Fully qualified: DiGi.Core also declares a Convert, and both namespaces are imported here.
-                return System.Convert.ChangeType(0, Nullable.GetUnderlyingType(type) ?? type);
+                return System.Convert.ChangeType(0, Nullable.GetUnderlyingType(type) ?? type, CultureInfo.CurrentCulture);
             }
 
             List<object?> values_Default = [];

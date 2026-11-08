@@ -27,7 +27,7 @@ The label's source is the stored `User year built` column of `building_data` - `
 The name and the `short` type match the label the incumbent model was trained against, so the regenerated `.mbconfig` keeps one `LabelColumn` across the retrain.
 
 ```csharp
-public static ExtendedColumn YearBuilt;
+public static readonly ExtendedColumn YearBuilt;
 ```
 
 #### Field Value
