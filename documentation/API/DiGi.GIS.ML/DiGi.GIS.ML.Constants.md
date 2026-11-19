@@ -112,7 +112,7 @@ public const float ConfidentDetectionThreshold = 0.5;
 
 The first year the orthophoto sequence emits per\-year detection columns for\.
 
-A detection year is [FirstPredictionYear](DiGi.GIS.ML.Constants.md#DiGi.GIS.ML.Constants.Plausibility.FirstPredictionYear 'DiGi\.GIS\.ML\.Constants\.Plausibility\.FirstPredictionYear') plus the index of the first confidence column reporting the building, so this constant has to move with the sequence.
+A detection year is [FirstPredictionYear](DiGi.GIS.ML.Constants.md#DiGi.GIS.ML.Constants.Plausibility.FirstPredictionYear 'DiGi\.GIS\.ML\.Constants\.Plausibility\.FirstPredictionYear') plus the index of the first confidence column reporting the building, so this constant has to move with the sequence. It is [DiGi\.GIS\.Constants\.YearBuiltPrediction\.FirstYear](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.constants.yearbuiltprediction.firstyear 'DiGi\.GIS\.Constants\.YearBuiltPrediction\.FirstYear'), which the heat-demand calculation reads to tell a prediction that only bounds the year built (DiGi-Organization/DiGi.GIS.Analytical#16).
 
 ```csharp
 public const int FirstPredictionYear = 2008;

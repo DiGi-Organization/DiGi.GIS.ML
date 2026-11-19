@@ -20,8 +20,8 @@ namespace DiGi.GIS.ML.Constants
 
         /// <summary>
         /// The first year the orthophoto sequence emits per-year detection columns for.
-        /// <para>A detection year is <see cref="FirstPredictionYear"/> plus the index of the first confidence column reporting the building, so this constant has to move with the sequence.</para>
+        /// <para>A detection year is <see cref="FirstPredictionYear"/> plus the index of the first confidence column reporting the building, so this constant has to move with the sequence. It is <see cref="GIS.Constants.YearBuiltPrediction.FirstYear"/>, which the heat-demand calculation reads to tell a prediction that only bounds the year built (DiGi-Organization/DiGi.GIS.Analytical#16).</para>
         /// </summary>
-        public const int FirstPredictionYear = 2008;
+        public const int FirstPredictionYear = GIS.Constants.YearBuiltPrediction.FirstYear;
     }
 }
